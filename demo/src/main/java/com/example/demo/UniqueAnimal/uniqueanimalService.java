@@ -14,8 +14,8 @@ public class uniqueanimalService {
         return uniqueanimalRepository.findAll();
     }
 
-    public uniqueanimal getUniqueanimaById(@PathVariable long Id){
-        return uniqueanimalRepository.findById(Id).orElse(null);
+    public uniqueanimal getUniqueanimalById(@PathVariable long id){
+        return uniqueanimalRepository.findById(id).orElse(null);
     }
 
     public Object getuniqueanimalByRegion(String region){

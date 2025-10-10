@@ -35,7 +35,10 @@ public class uniqueanimal {
     public long getId() {
         return Id;
     }
-
+    
+    public uniqueanimal(){
+        
+    }
     public uniqueanimal(long id, String name, String description, String summary, Date dateAdded, double lifeSpan) {
         Id = id;
         this.name = name;
