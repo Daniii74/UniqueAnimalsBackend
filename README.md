@@ -33,7 +33,7 @@ Spring ORM allows seamless integration of Hibernate and JPA, making database int
 - [Entity](https://github.com/Daniii74/UniqueAnimalsBackend/blob/28744955629cbe64d81f5d92220ccb85f213039d/demo/src/main/java/com/example/demo/UniqueAnimal/uniqueanimal.java#L13)
   - The Unique Animal class is annotated as an `@Entity `. This is used to map class attributes to database tables and SQL types.
   - We also annotated with `@Table` to give Hibernate directions to use this specific table name. This is optional but it helps with naming conventions.
-  - Any Entity must have at least one attribute that is annotated as an `@Id`. In our case it's conveniently the `Unique AnimalId` attribute.
+  - Any Entity must have at least one attribute that is annotated as an `@Id`. In our case it's conveniently the `Id` attribute.
     - We are also using an autogeneration strategy for the ID. This way we are not manually assigning IDs to our Unique Animals. This is optional.
        - For this reason, we also added a constructor to make a Unique Animal without an ID.
   - An Entity must have a no-argument constructor.
@@ -103,10 +103,10 @@ Gets a list of all Unique Animals in the database.
 ```
 
 2. ### [`uniqueanimal/{id}`](http://localhost:8080/uniqueanimal/9) (GET)
-Gets an individual Unique Animal in the system. Each Unique Animal is identified by a numeric `Unique AnimalId`
+Gets an individual Unique Animal in the system. Each Unique Animal is identified by a numeric `Id`
 
 #### Parameters
-- Path Variable: `Unique AnimalId` &lt;Long &gt; - REQUIRED
+- Path Variable: `Id` &lt;Long &gt; - REQUIRED
 
 #### Response - A single Unique Animal
 
@@ -148,7 +148,7 @@ Gets a list of Unique Animals with a name that contains the given string.
 Gets a list of Unique Animals for a named region.
 
 #### Parameters
-- path variable: `major` &lt; String &gt; - REQUIRED
+- path variable: `region` &lt; String &gt; - REQUIRED
 
 #### Response - A JSON array of Unique Animal objects.
 
@@ -195,11 +195,11 @@ A Unique Animal object. Note the object does not include an ID as this is autoge
   }
 ```
 
-7. ### [`uniqueanimal/{id}`](http://localhost:8080/uniqueanimal/9) (PUT)
+6. ### [`uniqueanimal/{id}`](http://localhost:8080/uniqueanimal/9) (PUT)
 Update an existing Unique Animal.
 
 #### Parameters
-- Path Variable: `Unique AnimalId` &lt;integer&gt; - REQUIRED
+- Path Variable: `Id` &lt;integer&gt; - REQUIRED
 
 #### Request Body
 A Unique Animal object with the updates.
@@ -226,11 +226,11 @@ A Unique Animal object with the updates.
 }
 ```
 
-8. ### [`uniqueanimal/{id}`](http://localhost:8080/uniqueanimals/1) (DELETE)
+7. ### [`uniqueanimal/{id}`](http://localhost:8080/uniqueanimals/1) (DELETE)
 Delete an existing Unique Animal.
 
 #### Parameters
-- Path Variable: `Unique AnimalId` &lt;integer&gt; - REQUIRED
+- Path Variable: `Id` &lt;integer&gt; - REQUIRED
 
 #### Response - the updated list of Unique Animals.
 ```
