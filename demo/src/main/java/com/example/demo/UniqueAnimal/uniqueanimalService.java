@@ -30,7 +30,8 @@ public class uniqueanimalService {
         return uniqueanimalRepository.save(uniqueanimal);
     }
 
-    public uniqueanimal updateUniqueanimalById(Long Id, uniqueanimal uniqueanimal){
+    public uniqueanimal updateUniqueanimalById(Long id, uniqueanimal uniqueanimal){
+        uniqueanimal.setId(id);
         return uniqueanimalRepository.save(uniqueanimal);
     }
 

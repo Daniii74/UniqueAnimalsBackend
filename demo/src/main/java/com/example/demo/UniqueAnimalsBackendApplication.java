@@ -9,5 +9,4 @@ public class UniqueAnimalsBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UniqueAnimalsBackendApplication.class, args);
 	}
-
 }

@@ -48,7 +48,7 @@ public class uniqueanimalController {
     }
 
     @PutMapping("/uniqueanimal/{id}")
-    public uniqueanimal updateUniqueanimal(@PathVariable Long id, uniqueanimal uniqueanimal){
+    public uniqueanimal updateUniqueanimal(@PathVariable Long id, @RequestBody uniqueanimal uniqueanimal){
         uniqueanimalService.updateUniqueanimalById(id, uniqueanimal);
         return uniqueanimalService.getUniqueanimalById(id);
     }
@@ -58,9 +58,4 @@ public class uniqueanimalController {
         uniqueanimalService.deleteUniqueanimal(id);
         return uniqueanimalService.getAlluniqueanimals();
     }
-
-    
-
-    
-
 }
