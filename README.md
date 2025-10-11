@@ -274,4 +274,4 @@ Delete an existing Unique Animal.
 ]
 ```
 #### Video Link
-- [Video Link](https://uncg-my.sharepoint.com/personal/d_asif_uncg_edu/_layouts/15/stream.aspx?id=%2Fpersonal%2Fd%5Fasif%5Funcg%5Fedu%2FDocuments%2FClasses%2FFall%2D2025%2FCSC%20340%2D02%20Software%20Engineering%2FBackendWebVideo%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E169d0c14%2Db2c3%2D4ad4%2Da9b8%2D860ed8cba34d)
+- [Video Link](https://uncg-my.sharepoint.com/:v:/g/personal/d_asif_uncg_edu/EZqFp04ii9RPnOlXZdRFfCkBKb4-uLs_dkQexM-rpmshaQ?e=Ezrv0l)
