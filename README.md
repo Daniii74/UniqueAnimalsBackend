@@ -166,7 +166,7 @@ Gets a list of Unique Animals for a named region.
 ]
 ```
 
-5. ### [`/`](http://localhost:8080/uniqueanimals) (POST)
+5. ### [`/uniqueanimals`](http://localhost:8080/uniqueanimals) (POST)
 Create  a new Unique Animal entry
 
 #### Request Body
