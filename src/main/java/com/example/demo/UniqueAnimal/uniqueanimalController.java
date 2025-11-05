@@ -1,6 +1,7 @@
 package com.example.demo.UniqueAnimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 public class uniqueanimalController {
     @Autowired
@@ -47,13 +49,13 @@ public class uniqueanimalController {
         return uniqueanimalService.addUniqueanimal(uniqueanimal);
     }
 
-    @PutMapping("/uniqueanimal/{id}")
+    @PutMapping("/uniqueanimal/edit/{id}")
     public uniqueanimal updateUniqueanimal(@PathVariable Long id, @RequestBody uniqueanimal uniqueanimal){
         uniqueanimalService.updateUniqueanimalById(id, uniqueanimal);
         return uniqueanimalService.getUniqueanimalById(id);
     }
 
-    @DeleteMapping("/uniqueanimal/{id}")
+    @DeleteMapping("/uniqueanimal/delete/{id}")
     public Object deleteUniqueanimal(@PathVariable Long id){
         uniqueanimalService.deleteUniqueanimal(id);
         return uniqueanimalService.getAlluniqueanimals();

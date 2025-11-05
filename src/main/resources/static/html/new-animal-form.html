@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css" >
+    <title>New Animal Form</title>
+</head>
+<body>
+    <div id="navbar">
+        <h2 id="name">Unique Animal House</h2>
+        <div id="navbar-links">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div id="outer-container">
+        <div id="form-container">
+            <h1 id="form-heading" style="text-align: center;">Add new Animal</h1>
+            <form id="new-animal-form">
+
+                <label>
+                    Name:
+                    <input type="text" id="animal-name" placeholder="Name">
+                </label>
+
+                <label>
+                    Region:
+                    <input type="text" id="region" placeholder="Region">
+                </label>
+
+                <label>
+                    Average Life Span:
+                    <input type="number" id="life-span" placeholder="Avg Life Span in years">
+                </label>
+
+                <label>
+                    Summary:
+                    <input type="text" id="summary" placeholder="Summary">
+                </label>
+                
+
+                <label>
+                    Image Url:
+                    <input type="text" id="image-url" placeholder="Image URL">
+                </label>
+
+
+                <label>
+                    Description:
+                    <textarea type="text" id="description" placeholder="Description"></textarea>
+                </label>
+
+
+                <input id="submit-button" type="submit">
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <div id="footer">
+        <p>Copyright 2025</p>
+    </div>
+
+    <script>
+        const baseUrl = "http://127.0.0.1:8080/"
+        const form = document.getElementById("new-animal-form");
+        const formHeading = document.getElementById("form-heading");
+        let id = null;
+        const parameters = new URLSearchParams(window.location.search);
+
+        function submitForm(url, newAnimal, type) {
+            fetch(baseUrl + url, {
+                    method: type,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(newAnimal) 
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "index.html";
+                    } else {
+                        alert("Failed to add new animal.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while adding the animal.");
+                });
+        }
+
+
+        if (parameters.has("id")) {
+            formHeading.textContent = "Edit Animal";
+            id = parameters.get("id");
+            fetch(baseUrl + "uniqueanimal/" + id)
+            .then(response => response.json()) 
+            .then(animal => {
+                document.getElementById("animal-name").value = animal.name;
+                document.getElementById("region").value = animal.region;
+                document.getElementById("life-span").value = animal.lifeSpan;
+                document.getElementById("summary").value = animal.summary;
+                document.getElementById("image-url").value = animal.imageUrl;
+                document.getElementById("description").value = animal.description;
+            }); 
+        }
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const newAnimal = {
+                    name: document.getElementById("animal-name").value,
+                    region: document.getElementById("region").value,
+                    lifeSpan: parseInt(document.getElementById("life-span").value),
+                    summary: document.getElementById("summary").value,
+                    imageUrl: document.getElementById("image-url").value,
+                    description: document.getElementById("description").value
+                };
+                if(id) {
+                    newAnimal.id = id;
+                    submitForm("uniqueanimal/edit/"+id, newAnimal, "PUT");
+                }else{
+                    submitForm("uniqueanimal", newAnimal, "POST");
+                }
+            };
+    </script>
+</body>
+</html>

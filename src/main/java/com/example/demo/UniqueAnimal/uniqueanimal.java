@@ -2,6 +2,8 @@ package com.example.demo.UniqueAnimal;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,11 +22,14 @@ public class uniqueanimal {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2000)
     private String description;
+
+    private String imageUrl;
 
     private String summary;
 
+    @CreationTimestamp
     private Date dateAdded;
 
     private double lifeSpan;
@@ -110,6 +115,12 @@ public class uniqueanimal {
         this.region = region;
     }
 
-    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
     
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>Details</title>
+</head>
+<body>
+    <div id="navbar">
+        <h2 id="name">Unique Animal House</h2>
+        <div id="navbar-links">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div id="outer-container">
+        <div id="details-container">
+
+        </div>
+    </div>
+
+    <script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const animalId = urlParams.get('id');
+        const baseUrl = "http://127.0.0.1:8080/"
+
+        const detailContainer = document.getElementById("details-container")
+
+        fetch(baseUrl + "uniqueanimal/" + animalId)
+        .then(Response => Response.json())
+        .then(data => {
+            
+            const detailCard = document.createElement('div');
+            detailCard.className = "detail-card";
+
+            const breaks = document.createElement('br');
+
+            const detaileCardImg = document.createElement('img');
+            detaileCardImg.src = data.imageUrl;
+            detaileCardImg.alt = data.name;
+
+            const headings = document.createElement('div');
+            headings.className = "headings";
+
+            const detailCardName = document.createElement('h1');
+            detailCardName.textContent = data.name;
+
+            const detailCardRegion = document.createElement('p');
+            detailCardRegion.innerHTML = "<strong>Region: </strong>" + data.region;
+
+            const detailCardLifeSpan = document.createElement('p');
+            detailCardLifeSpan.innerHTML = "<strong>Average Life Span: </strong>" + data.lifeSpan + " years";
+
+            const detailCardDescription = document.createElement('p');
+            detailCardDescription.innerHTML = "<strong>Description: </strong>" + data.description;
+
+            const detailCardDateAdded = document.createElement('p');
+            detailCardDateAdded.innerHTML = "<strong>Date Added: </strong>" + new Date(data.dateAdded).toLocaleDateString();
+            
+            detailContainer.appendChild(detailCard);
+            detailCard.appendChild(detaileCardImg);
+            headings.appendChild(detailCardName);
+            headings.appendChild(detailCardRegion);
+            headings.appendChild(detailCardLifeSpan);
+            headings.appendChild(detailCardDescription);
+            headings.appendChild(detailCardDateAdded);
+            detailCard.appendChild(headings);
+            detailContainer.appendChild(breaks);
+        })
+
+        
+
+    </script>
+</body>
+</html>
