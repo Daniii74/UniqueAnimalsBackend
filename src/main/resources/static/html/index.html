@@ -19,8 +19,16 @@
         <h1 style="text-align: center;">Welcome to Unique Animals Gallery</h1>
         <p style="text-align: center;">Exploring unique animals in the world</p>
     </div>
+    <div>
+        <form id="search-type">
+            <input type="radio" id="search-by-name" name="search-type" value="name" checked>
+            <label for="search-by-name">Search by Name</label>
+            <input type="radio" id="search-by-region" name="search-type" value="region">
+            <label for="search-by-region">Search by Region</label>
+        </form>
+    </div>
     <div id="search">
-        <input type="text" id="search-by-region" placeholder="Search Animals by region...">
+        <input type="text" id="search-input" placeholder="Search Animals by name...">
         <button id="add-new-animal">Add a new Animal</button>
     </div>
     <div id="outer-container">
@@ -37,7 +45,8 @@
         const baseUrl = "http://127.0.0.1:8080/"
         const container = document.getElementById("container");
         const addNewBtn = document.getElementById("add-new-animal")
-        const searchInput = document.getElementById("search-by-region");
+        const searchInput = document.getElementById("search-input");
+        const searchTypeForm = document.getElementById("search-type");
 
         addNewBtn.onclick = function() {
              window.location.href = " new-animal-form.html"
@@ -117,19 +126,40 @@
         .then(Response => Response.json())
         .then(data => data.forEach(animal => createAnimalCard(animal)));
 
+        searchTypeForm.onchange = function() {
+            const selectedType = document.querySelector('input[name="search-type"]:checked').value;
+            if(selectedType == "region") {
+                searchInput.placeholder = "Search Animals by region...";
+            } else {
+                searchInput.placeholder = "Search Animals by name...";
+            }
+        };
+
+        let currentcontroller;
+
         searchInput.oninput = function() {
+            const selectedType = document.querySelector('input[name="search-type"]:checked').value;
             const filter = searchInput.value.toLowerCase();
+
+            if (currentcontroller){ console.log(currentcontroller); currentcontroller.abort(); };
+            currentcontroller = new AbortController();
+
+            container.innerHTML = "";
             if(filter === "") {
-                container.innerHTML = "";
                 fetch(baseUrl + "uniqueanimals")
                 .then(Response => Response.json())
                 .then(data => data.forEach(animal => createAnimalCard(animal)));
                 return;
             }else{
-            container.innerHTML = "";
-            fetch(baseUrl + "uniqueanimals/region/" + filter)
-            .then(Response => Response.json())
-            .then(data => data.forEach(animal => createAnimalCard(animal)));
+                if(selectedType === "region") {
+                    fetch(baseUrl + "uniqueanimals/region/" + filter)
+                    .then(Response => Response.json())
+                    .then(data => data.forEach(animal => createAnimalCard(animal)));
+                } else {
+                    fetch(baseUrl + `uniqueanimals/search?name=${encodeURIComponent(filter)}`)
+                    .then(Response => Response.json())
+                    .then(data => data.forEach(animal => createAnimalCard(animal)));
+                }
             }
         };
     </script>

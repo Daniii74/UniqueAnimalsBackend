@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface uniqueanimalRepository extends JpaRepository<uniqueanimal, Long>{
 
-    @Query(value = "select * from uniqueanimal u where u.name like %?1% ", nativeQuery = true)
+    @Query(value = "select * from uniqueanimal u where u.name ilike %?1% ", nativeQuery = true)
     List<uniqueanimal> getUniqueanimalByName(String name);
 
     @Query(value = "SELECT * FROM uniqueanimal u WHERE u.region ILIKE CONCAT('%', ?1, '%')", nativeQuery = true)
